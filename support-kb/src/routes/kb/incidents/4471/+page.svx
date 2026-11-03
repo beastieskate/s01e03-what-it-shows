@@ -1,0 +1,38 @@
+---
+layout: runbook
+title: '#4471 · dates wrong in day-first locales'
+owner: support desk
+status: known
+reviewed: 2026-11-03
+signature: 'beastieskate / S01E03 / 2026-11-03'
+---
+
+Since April, people have reported bookings landing on the wrong day. The desk merged **412 unique reports** into #4471; the export contained 15 duplicate rows.
+
+The reports describe two separate problems. Both affect tenants whose locale writes the day before the month, but they enter through different date-reading paths.
+
+## Problems
+
+### Shared parser reads day-first dates as month-first — 379 reports
+
+The shared parser reads every date month first. For day-first tenants, an input such as `07/04/2026` is interpreted as July 4 instead of April 7. This is the larger cause group and includes reports from app, email, and form channels.
+
+**GitHub ticket:** [parser: day-first dates are read month-first](https://github.com/beastieskate/s01e03-what-it-shows/issues/1)
+
+### Booking-v3 hint disagrees with the tenant’s date order — 33 reports
+
+The `booking-v3` form displays an `MM/DD/YYYY` hint to tenants whose locale is day-first. People follow the hint, then the form reads the value using the tenant’s day-first convention, so month and day are exchanged.
+
+**GitHub ticket:** [hint: booking-v3 shows the wrong date order](https://github.com/beastieskate/s01e03-what-it-shows/issues/2)
+
+## Counts
+
+| Problem | Reports | Ticket |
+| --- | ---: | --- |
+| Shared parser reads day-first dates as month-first | 379 | #1 |
+| Booking-v3 hint disagrees with tenant date order | 33 | #2 |
+| **Total unique reports in #4471** | **412** | |
+
+The counts use one row per report ID. The raw export has 427 rows because 15 report IDs occur more than once in overlapping export pages.
+
+<RenderStamp {signature} />
