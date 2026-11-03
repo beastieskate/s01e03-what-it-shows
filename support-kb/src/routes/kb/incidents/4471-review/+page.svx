@@ -4,7 +4,7 @@ title: '#4471 review · two causes, different outcomes'
 owner: support desk
 status: closed
 reviewed: 2026-11-03
-signature: 'beastieskate / S01E03 / 2026-11-03'
+signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjQ5MjQiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzcyMzcxOSwiZXhwIjoxNzkzODEwMTE5fQ.3cZq2odoMar9DxCTfR1RkNDWw7-V4ARUhIuESJ2D_Lw'
 ---
 
 <script>
