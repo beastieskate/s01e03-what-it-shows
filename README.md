@@ -8,3 +8,12 @@ The export has 412 unique reports (427 rows including 15 duplicate rows). The tw
 - booking-v3 date hint disagrees with tenant date order: 33 reports
 
 Rendered page: [`rendered/kb/incidents/4471/index.html`](rendered/kb/incidents/4471/index.html)
+
+## Engineering outcome
+
+The course's live desk update marks #4471 closed on 5 October 2026:
+
+- [Parser issue #1](https://github.com/beastieskate/s01e03-what-it-shows/issues/1): fixed by `fix(dates): parse dd/mm for eu locales`; closed as completed.
+- [Hint issue #2](https://github.com/beastieskate/s01e03-what-it-shows/issues/2): won't fix because the booking-v3 form was retired; closed as not planned.
+
+These are separate outcomes. A closed parent ticket does not mean that every merged problem was fixed.

@@ -2,26 +2,39 @@
 layout: runbook
 title: '#4471 · dates wrong in day-first locales'
 owner: support desk
-status: known
+status: closed
 reviewed: 2026-11-03
 signature: 'beastieskate / S01E03 / 2026-11-03'
 ---
 
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
 Since April, people have reported bookings landing on the wrong day. The desk merged **412 unique reports** into #4471; the export contained 15 duplicate rows.
 
-The reports describe two separate problems. Both affect tenants whose locale writes the day before the month, but they enter through different date-reading paths.
+The reports describe two separate problems. Both affected tenants whose locale writes the day before the month, but they entered through different date-reading paths.
+
+## Engineering outcome
+
+The course's live engineering update marks **#4471 closed on 5 October 2026**. The two problems have different closure reasons:
+
+- **Parser — fixed.** Engineering shipped `fix(dates): parse dd/mm for eu locales`. [Issue #1](https://github.com/beastieskate/s01e03-what-it-shows/issues/1) is closed as completed.
+- **Hint — won't fix.** The `booking-v3` form was retired, not repaired. [Issue #2](https://github.com/beastieskate/s01e03-what-it-shows/issues/2) is closed as not planned.
+
+The counts below describe the historical export; closing the parent ticket does not mean that both problems were fixed.
 
 ## Problems
 
 ### Shared parser reads day-first dates as month-first — 379 reports
 
-The shared parser reads every date month first. For day-first tenants, an input such as `07/04/2026` is interpreted as July 4 instead of April 7. This is the larger cause group and includes reports from app, email, and form channels.
+Before the fix, the shared parser read every date month first. For day-first tenants, an input such as `07/04/2026` was interpreted as July 4 instead of April 7. This is the larger cause group and includes reports from app, email, and form channels.
 
 **GitHub ticket:** [parser: day-first dates are read month-first](https://github.com/beastieskate/s01e03-what-it-shows/issues/1)
 
 ### Booking-v3 hint disagrees with the tenant’s date order — 33 reports
 
-The `booking-v3` form displays an `MM/DD/YYYY` hint to tenants whose locale is day-first. People follow the hint, then the form reads the value using the tenant’s day-first convention, so month and day are exchanged.
+The retired `booking-v3` form displayed an `MM/DD/YYYY` hint to tenants whose locale is day-first. People followed the hint, then the form read the value using the tenant's day-first convention, so month and day were exchanged.
 
 **GitHub ticket:** [hint: booking-v3 shows the wrong date order](https://github.com/beastieskate/s01e03-what-it-shows/issues/2)
 

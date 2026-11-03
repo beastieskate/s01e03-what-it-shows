@@ -22,17 +22,24 @@
   <header>
     <a class="crumb" href="/kb">support desk · kb</a>
     <h1>#4471 · dates wrong in day-first locales</h1>
-    <p class="meta"><span>owner <b>support desk</b></span><span>known</span><span>reviewed 2026-11-03</span></p>
+    <p class="meta"><span>owner <b>support desk</b></span><span>closed</span><span>reviewed 2026-11-03</span></p>
   </header>
   <main>
     <p>Since April, people have reported bookings landing on the wrong day. The desk merged <strong>412 unique reports</strong> into #4471; the export contained 15 duplicate rows.</p>
-    <p>The reports describe two separate problems. Both affect tenants whose locale writes the day before the month, but they enter through different date-reading paths.</p>
+    <p>The reports describe two separate problems. Both affected tenants whose locale writes the day before the month, but they entered through different date-reading paths.</p>
+    <h2>Engineering outcome</h2>
+    <p>The course's live engineering update marks <strong>#4471 closed on 5 October 2026</strong>. The two problems have different closure reasons:</p>
+    <ul>
+      <li><strong>Parser — fixed.</strong> Engineering shipped <code>fix(dates): parse dd/mm for eu locales</code>. <a href="https://github.com/beastieskate/s01e03-what-it-shows/issues/1">Issue #1</a> is closed as completed.</li>
+      <li><strong>Hint — won't fix.</strong> The <code>booking-v3</code> form was retired, not repaired. <a href="https://github.com/beastieskate/s01e03-what-it-shows/issues/2">Issue #2</a> is closed as not planned.</li>
+    </ul>
+    <p>The counts below describe the historical export; closing the parent ticket does not mean that both problems were fixed.</p>
     <h2>Problems</h2>
     <h3>Shared parser reads day-first dates as month-first — 379 reports</h3>
-    <p>The shared parser reads every date month first. For day-first tenants, an input such as <code>07/04/2026</code> is interpreted as July 4 instead of April 7. This is the larger cause group and includes reports from app, email, and form channels.</p>
+    <p>Before the fix, the shared parser read every date month first. For day-first tenants, an input such as <code>07/04/2026</code> was interpreted as July 4 instead of April 7. This is the larger cause group and includes reports from app, email, and form channels.</p>
     <p><strong>GitHub ticket:</strong> <a href="https://github.com/beastieskate/s01e03-what-it-shows/issues/1">parser: day-first dates are read month-first</a></p>
     <h3>Booking-v3 hint disagrees with the tenant’s date order — 33 reports</h3>
-    <p>The <code>booking-v3</code> form displays an <code>MM/DD/YYYY</code> hint to tenants whose locale is day-first. People follow the hint, then the form reads the value using the tenant’s day-first convention, so month and day are exchanged.</p>
+    <p>The retired <code>booking-v3</code> form displayed an <code>MM/DD/YYYY</code> hint to tenants whose locale is day-first. People followed the hint, then the form read the value using the tenant's day-first convention, so month and day were exchanged.</p>
     <p><strong>GitHub ticket:</strong> <a href="https://github.com/beastieskate/s01e03-what-it-shows/issues/2">hint: booking-v3 shows the wrong date order</a></p>
     <h2>Counts</h2>
     <table><thead><tr><th>Problem</th><th>Reports</th><th>Ticket</th></tr></thead><tbody>
